@@ -17,7 +17,7 @@ public class LoadData : MonoBehaviour
         }
         else
         {
-            loadText.text = " There is no registered player";
+            loadText.text = "There is no registered player";
         }
     }
     public void Delete()
@@ -26,6 +26,10 @@ public class LoadData : MonoBehaviour
         infoText.text = "Your data successfully deleted";
     }
     public void Back()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Game()
     {
         SceneManager.LoadScene(2);
     }
