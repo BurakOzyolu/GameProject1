@@ -11,10 +11,9 @@ public class Door : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             winPanel.SetActive(true);
-            LevelManager.canMove = false;
             runText.SetActive(false);
             SoundManager.instance.PlayWithIndex(13);
-           
+            collision.gameObject.SetActive(false);
         }
     }
 }

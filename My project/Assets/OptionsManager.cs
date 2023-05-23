@@ -61,7 +61,7 @@ public class OptionsManager : MonoBehaviour
     public void WindowedToggle()
     {
         PlayerPrefs.SetInt("Windowed", windowedToggle.isOn ? 1 : 0);
-        if (windowedToggle.isOn)
+        if (!windowedToggle.isOn)
         {
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         }

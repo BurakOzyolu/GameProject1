@@ -25,6 +25,12 @@ public class LevelManager : MonoBehaviour
     public bool canWin;
     public static bool canMove = true;
 
+    [Header("Mode Spawn")]
+    [SerializeField] float easySpawn;
+    [SerializeField] float normalSpawn;
+    [SerializeField] float hardSpawn;
+
+
     // Awake : Starttan once calisir. Genelde sahne baslatma ve referans alma islemleri icin kullanilir. 
     private void Awake()
     {
@@ -34,11 +40,12 @@ public class LevelManager : MonoBehaviour
     {
         StartDelayFries();
         StartCoroutine(CreateKnife());
+        maxSpawn = HardenedScript.instance.HardenedLevel(maxSpawn, easySpawn, normalSpawn, hardSpawn);
+        canMove = true;
     }
     private void Update()
     {
         startSpawn = Random.Range(minSpawn, maxSpawn);
-
     }
 
 
@@ -83,6 +90,7 @@ public class LevelManager : MonoBehaviour
             FriesSpawner();
         }
     }
+    //Burada bicagi spawn ediyoruz.
     private IEnumerator CreateKnife()
     {
         yield return new WaitForSeconds(startWait);
