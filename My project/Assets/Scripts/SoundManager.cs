@@ -35,69 +35,9 @@ public class SoundManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
-
-    // audioSource.PlayOneShot metodu(parametre); PlayOneShot metodu parametre olarak verilen sesi bir kez calmasini saglar. 
-    /// <summary>
-    /// 0: Attack Enemy,
-    /// 1: Background,  
-    /// 2: DeathByEnemy, 
-    /// 3: DeathByFall,  
-    /// 4: DeathByBullet,  
-    /// 5: Fries,  
-    /// 6: FriesPop,  
-    /// 7: HitGround  
-    /// </summary>
-    /// <param name="index"></param>
+    //PlayWithIndex ile sesin index ile sesi çalýþtýrýyoruz
     public void PlayWithIndex(int index)
     {
         audioSource.PlayOneShot(soundList[index]);
     }
-    //PlayWithIndex ile sesin index ile sesi çalýþtýrýyoruz
-
-    //Ziplama Sesi
-    public void JumpSound()
-    {
-        audioSource.PlayOneShot(jumpSound);
-        Debug.Log("Jumped");
-    }
-
-    // Zemin Sesi
-    public void LandSoundSound()
-    {
-        audioSource.PlayOneShot(landSound);
-        Debug.Log("Land");
-    }
-
-    // Dusman tarafindan olme sesi
-    public void DeadByEnemySound()
-    {
-        audioSource.PlayOneShot(deadByEnemySound);
-        Debug.Log("Dead by Enemy");
-    }
-
-    // Asagiya duserek olme sesi
-    public void DeadByFallSound()
-    {
-        audioSource.PlayOneShot(deadByFallSound);
-        Debug.Log("Dead by Fall");
-    }
-
-    // Enemylerin saldiri sesi
-    public void AttackEnemySound()
-    {
-        audioSource.PlayOneShot(attackEnemySound);
-        Debug.Log("Enemy Attacked");
-    }
-
-    public void RunDoorSound()
-    {
-        audioSource.PlayOneShot(runDoorSound);
-        Debug.Log("Run door");
-    }
-    public void WinSound()
-    {
-        audioSource.PlayOneShot(winSound);
-        Debug.Log("Win");
-    }
-
 }

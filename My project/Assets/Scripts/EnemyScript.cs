@@ -8,7 +8,6 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float enemyAttackSpeed;
     [SerializeField] float xBoundry;
     [SerializeField] float yBoundry;
-    SoundManager soundManager;
     Delay delay;
     bool isAttacking;
     Canvas canvas;
@@ -18,7 +17,6 @@ public class EnemyScript : MonoBehaviour
     // Buradaki Start metodunda SoundManager, Delay, Canvas ve PlayerHealth scriptlerini kullanmak icin gerekli atamalari yapiyoruz. (onlari cekiyoruz)
     private void Start()
     {
-        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         delay = GameObject.Find("Level Manager").GetComponent<Delay>();
         canvas = GameObject.Find("UI Manager").GetComponent<Canvas>();
         playerHealth = GameObject.Find("Level Manager").GetComponent<PlayerHealth>();
@@ -56,7 +54,7 @@ public class EnemyScript : MonoBehaviour
         // Diyoruz ki eger enemy saldiriya gecmediyse icindeki kodlari cagir. En basta yukarida hatirlanacagi uzere isAttacking false olarak ayarlamistik. O yuzden enemy ilk canlandiginda bi metod dogal olarak calisacak.
         while (!isAttacking) 
         {
-            soundManager.PlayWithIndex(0); // Enemynin saldiri sesini cikarmasini sagladik.
+            SoundManager.instance.PlayWithIndex(0); // Enemynin saldiri sesini cikarmasini sagladik.
             isAttacking = true; // Surekli olarak ses cikarmasini istemedigimiz icin donguden cikmak icin isAttackingi true olarak ayarladik.
         }
     }
@@ -65,7 +63,7 @@ public class EnemyScript : MonoBehaviour
         // Bizim enemyler bir yerlere carpabilir. Eger bizim karakterimize carpar ise ne olmasi gerekiyor. Karakterimiz olum sesi cikarticak, oldugu icin yok olacak, cani bir azalicak ve eger cani var ise tekrar canlanicak. Buradaki if blogu bu ise yariyor. 
         if (collision.gameObject.CompareTag("Player"))
         {
-            soundManager.PlayWithIndex(2);
+            SoundManager.instance.PlayWithIndex(2);
             Destroy(collision.gameObject);
             Movement.Cancel();
             playerHealth.Lives();

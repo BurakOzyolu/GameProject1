@@ -37,7 +37,7 @@ public class Knife : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SoundManager.instance.PlayWithIndex(13);
+            SoundManager.instance.PlayWithIndex(9);
             Instantiate(particle, collision.gameObject.transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
             PlayerHealth.instance.Lives();

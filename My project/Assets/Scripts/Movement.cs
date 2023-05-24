@@ -8,7 +8,6 @@ public class Movement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float moveSpeed;
     [SerializeField] float playerYBoundry;
-    SoundManager soundManager;
     Delay delay;
     PlayerHealth playerHealth;
     private float horizontalMove;
@@ -26,7 +25,6 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         delay = GameObject.Find("Level Manager").GetComponent<Delay>();
         playerHealth = GameObject.Find("Level Manager").GetComponent<PlayerHealth>();
         tr = GetComponent<TrailRenderer>();
@@ -75,7 +73,7 @@ public class Movement : MonoBehaviour
     {
         if (transform.position.y < playerYBoundry)
         {
-            soundManager.PlayWithIndex(3);
+            SoundManager.instance.PlayWithIndex(3);
             Destroy(gameObject);
             Movement.Cancel();
             playerHealth.Lives();
