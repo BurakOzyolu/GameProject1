@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] float turnSpeed;
     [SerializeField] float moveSpeed;
     [SerializeField] ParticleSystem particle;
@@ -20,7 +19,6 @@ public class Knife : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (transform.position.x < -destroyLimit)
@@ -47,7 +45,7 @@ public class Knife : MonoBehaviour
             {
                 Delay.instance.StartDelayTime();
             }
-            Movement.Cancel();
+            Movement.Cancel(); 
             Destroy(gameObject);
         }
     }
