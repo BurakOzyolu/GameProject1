@@ -18,7 +18,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            Debug.Log("Sahnede fazladan sound manager olamaz");
         }
     }
     #endregion

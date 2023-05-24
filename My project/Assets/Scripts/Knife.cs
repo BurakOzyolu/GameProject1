@@ -13,6 +13,7 @@ public class Knife : MonoBehaviour
     [SerializeField] float easySpeed;
     [SerializeField] float normalSpeed;
     [SerializeField] float hardSpeed;
+    private GameObject player;
     void Start()
     {
         moveSpeed = HardenedScript.instance.HardenedLevel(moveSpeed, easySpeed, normalSpeed, hardSpeed);
@@ -21,6 +22,8 @@ public class Knife : MonoBehaviour
 
     void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) { Destroy(gameObject); }
         if (transform.position.x < -destroyLimit)
         {
             Destroy(gameObject);

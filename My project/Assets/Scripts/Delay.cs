@@ -19,7 +19,6 @@ public class Delay : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            Debug.Log("Sahnede fazlada delay objesi var");
         }
     }
     #endregion

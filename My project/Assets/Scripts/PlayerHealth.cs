@@ -21,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            Debug.Log("Sahnede fazladan player health olamaz");
         }
     }
     #endregion

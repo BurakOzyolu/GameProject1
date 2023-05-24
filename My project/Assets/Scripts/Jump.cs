@@ -12,6 +12,8 @@ public class Jump : MonoBehaviour
     public static float gravityScale = 1.2f;
     public static float fallGravityScale = 7f;
 
+    private Animator animator;
+
     [SerializeField] float startJumpTime;
     float jumpTime;
     bool isJumping;
@@ -20,6 +22,7 @@ public class Jump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -41,6 +44,7 @@ public class Jump : MonoBehaviour
             doubleJump = true;
             jumpTime = startJumpTime;
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            animator.SetBool("Jump", true);
             SoundManager.instance.PlayWithIndex(8);
         }
         else if (Input.GetButtonDown("Jump") && doubleJump)
@@ -65,6 +69,10 @@ public class Jump : MonoBehaviour
         //{
         //    isJumping = false;
         //}
+        if (Mathf.Approximately(rb.velocity.y,0))
+        {
+            animator.SetBool("Jump", false);
+        }
         Gravity();
     }
     private bool IsGrounded()

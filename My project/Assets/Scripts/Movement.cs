@@ -13,6 +13,8 @@ public class Movement : MonoBehaviour
     private float horizontalMove;
     TrailRenderer tr;
 
+    private Animator animator;
+
     public static bool canDash = true;
     public static bool isDashing = false;
     public static bool dashed;
@@ -28,6 +30,8 @@ public class Movement : MonoBehaviour
         delay = GameObject.Find("Level Manager").GetComponent<Delay>();
         playerHealth = GameObject.Find("Level Manager").GetComponent<PlayerHealth>();
         tr = GetComponent<TrailRenderer>();
+        animator = GetComponent<Animator>();    
+        Cancel();
     }
 
     // Surekli olarak karakterimiz hareket edecegi icin veya ne zaman asagiya duserek olecegini bilemedigimiz icin bu iki metodu Update icerisinde calistiriyoruz.
@@ -51,6 +55,7 @@ public class Movement : MonoBehaviour
             horizontalMove = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(horizontalMove * moveSpeed, rb.velocity.y);
             SpriteFlip(horizontalMove);
+            animator.SetFloat("Move", Mathf.Abs(horizontalMove));
         }
 
     }

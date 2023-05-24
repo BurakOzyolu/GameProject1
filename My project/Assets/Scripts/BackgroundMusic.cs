@@ -18,7 +18,6 @@ public class BackgroundMusic : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            Debug.Log("Sahnede birden fazla Background Music var.");
         }
         DontDestroyOnLoad(gameObject); 
         // DontDestroyOnLoad metodu icerisinde bulunan parametreyi/degiskeni baska bir sahneye gecse bile silmesini engelleyecek.

@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     }
     #endregion
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI highScoreText;
+
     public static int score = 0;
     public static int highScore;
     private void Start()

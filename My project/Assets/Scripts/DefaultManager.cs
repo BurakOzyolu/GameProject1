@@ -13,7 +13,6 @@ public class DefaultManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Easy Mode");
         PlayerPrefs.DeleteKey("Normal Mode");
         PlayerPrefs.DeleteKey("Hard Mode");
-
         easyMod = false;
         normalMod = false;
         hardMod = false;
@@ -23,19 +22,24 @@ public class DefaultManager : MonoBehaviour
     {
         easyMod = true;
         PlayerPrefs.SetInt("Easy Mode", easyMod ? 1 : 0);
+        LevelManager.countForWin = 1;
+        UIManager.level = 1;
         SceneManager.LoadScene(1);
     }
     public void NormalButton()
     {
         normalMod = true;
         PlayerPrefs.SetInt("Normal Mode", normalMod ? 1 : 0);
+        LevelManager.countForWin = 2;
+        UIManager.level = 1;
         SceneManager.LoadScene(1);
     }
     public void HardButton()
     {
         hardMod = true;
         PlayerPrefs.SetInt("Hard Mode", hardMod ? 1 : 0);
+        LevelManager.countForWin = 3;
+        UIManager.level = 1;
         SceneManager.LoadScene(1);
-
     }
 }
