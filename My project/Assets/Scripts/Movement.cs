@@ -89,12 +89,12 @@ public class Movement : MonoBehaviour
         if (canDash && Input.GetKeyDown(KeyCode.LeftShift) && horizontalMove != 0)
         {
             StartCoroutine(Dash());
+            SoundManager.instance.PlayWithIndex(14);
         }
     }
 
     IEnumerator Dash()
     {
-        Debug.Log("Dashing");
         canDash = false;
         isDashing = true;
         dashed = true;
@@ -108,7 +108,6 @@ public class Movement : MonoBehaviour
         tr.emitting = true;
         yield return new WaitForSeconds(dashCooldown);
         dashed = false;
-        Debug.Log("Can dash");
         canDash = true;
     }
 
@@ -116,6 +115,7 @@ public class Movement : MonoBehaviour
     {
         canDash = true;
         isDashing = false;
+        dashed = false;
         Jump.fallGravityScale = 15f;
     }
 }

@@ -6,14 +6,6 @@ public class SoundManager : MonoBehaviour
 {
     // Ses Kaynaklarini atamak icin gerekli degiskenleri olusturduk.
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip jumpSound;
-    [SerializeField] AudioClip landSound;
-    [SerializeField] AudioClip deadByEnemySound;
-    [SerializeField] AudioClip deadByFallSound;
-    [SerializeField] AudioClip attackEnemySound;
-    [SerializeField] AudioClip runDoorSound;
-    [SerializeField] AudioClip winSound;
-
     public AudioClip[] soundList;
     #region Singleton
     public static SoundManager instance;

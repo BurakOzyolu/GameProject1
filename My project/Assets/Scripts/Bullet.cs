@@ -11,11 +11,17 @@ public class Bullet : MonoBehaviour
     [SerializeField] ParticleSystem groundParticle;
     [SerializeField] ParticleSystem playerDeathParticle;
     [SerializeField] ParticleSystem playerHitParticle;
+    [SerializeField] GameObject player;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Bullet'in icindeki rigidBody2D' yi cektik.
         delay = GameObject.Find("Level Manager").GetComponent<Delay>(); // Level Manager objesine giderek delay scriptini cektik. 
         playerHealth = GameObject.Find("Level Manager").GetComponent<PlayerHealth>(); // Yukarida oldugu gibi Level Manager objesini ariyoruz cunku icerisindeki PlayerHealth scriptini cekelim.
+    }
+    private void Update()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) { Destroy(gameObject); }
     }
     private void FixedUpdate()
     {

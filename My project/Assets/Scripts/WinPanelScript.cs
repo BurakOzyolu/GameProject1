@@ -18,6 +18,7 @@ public class WinPanelScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         LevelManager.canMove = true;
         LevelManager.knifeStop = false;
+        Movement.canDash = true;
     }
     public void Quit()
     {
