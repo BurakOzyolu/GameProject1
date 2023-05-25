@@ -43,6 +43,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(CreateKnife());
         maxSpawn = HardenedScript.instance.HardenedLevel(maxSpawn, easySpawn, normalSpawn, hardSpawn);
         canMove = true;
+        knifeStop = false;
     }
     private void Update()
     {

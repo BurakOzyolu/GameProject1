@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+
+    #region Singleton
+    public static Movement instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
+    }
+    #endregion
+
     static private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     public float moveSpeed;
@@ -25,13 +41,13 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        Cancel();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         delay = GameObject.Find("Level Manager").GetComponent<Delay>();
         playerHealth = GameObject.Find("Level Manager").GetComponent<PlayerHealth>();
         tr = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();    
-        Cancel();
     }
 
     // Surekli olarak karakterimiz hareket edecegi icin veya ne zaman asagiya duserek olecegini bilemedigimiz icin bu iki metodu Update icerisinde calistiriyoruz.
@@ -57,7 +73,6 @@ public class Movement : MonoBehaviour
             SpriteFlip(horizontalMove);
             animator.SetFloat("Move", Mathf.Abs(horizontalMove));
         }
-
     }
 
     // Karakterimizin sahip oldugu spriteRenderer icerisinde karakterimizi otomatik dondurmemizi saglayan .flipX metodu bulunuyor. Karakterimizin sola dogru gidiyorsa .flipX cevirerek karakterin donmesini sagliyoruz. Eger saga gidiyorsa donmesini iptal ediyoruz. SpriteFlip metodu karakterin hareket ettigi yone dogru bakmasini saglayan metod.
@@ -79,9 +94,10 @@ public class Movement : MonoBehaviour
         if (transform.position.y < playerYBoundry)
         {
             SoundManager.instance.PlayWithIndex(3);
-            Destroy(gameObject);
+
             Movement.Cancel();
             playerHealth.Lives();
+
             if (delay.delayTime == true)
             {
                 delay.StartDelayTime();
@@ -102,15 +118,16 @@ public class Movement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        dashed = true;
         rb.gravityScale = 0f;
         Jump.fallGravityScale = 0f;
+        tr.emitting = true;
         rb.velocity = new Vector2(dashAmount * horizontalMove,0f);
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = 1f;
         Jump.fallGravityScale = 15f;
+        tr.emitting = false;
         isDashing = false;
-        tr.emitting = true;
+        dashed = true;
         yield return new WaitForSeconds(dashCooldown);
         dashed = false;
         canDash = true;
@@ -122,5 +139,9 @@ public class Movement : MonoBehaviour
         isDashing = false;
         dashed = false;
         Jump.fallGravityScale = 15f;
+    }
+    public void DieAnimation()
+    {
+        animator.SetBool("Die", true);
     }
 }
