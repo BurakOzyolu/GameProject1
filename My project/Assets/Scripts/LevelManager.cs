@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     // Awake : Starttan once calisir. Genelde sahne baslatma ve referans alma islemleri icin kullanilir. 
     private void Awake()
     {
-        PlayerSpawner(); // Playerimizi olusturduk.
+        SpawnPlayerCoroutine(); // Playerimizi olusturduk.
     }
     private void Start()
     {
@@ -104,5 +104,14 @@ public class LevelManager : MonoBehaviour
             SoundManager.instance.PlayWithIndex(6);
             yield return new WaitForSeconds(startSpawn);
         }
+    }
+    void SpawnPlayerCoroutine()
+    {
+        StartCoroutine(PlayerSpawnerWait());
+    }
+    IEnumerator PlayerSpawnerWait()
+    {
+        yield return new WaitForSeconds(1);
+        PlayerSpawner();
     }
 }

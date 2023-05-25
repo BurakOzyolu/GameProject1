@@ -94,7 +94,7 @@ public class Movement : MonoBehaviour
         if (transform.position.y < playerYBoundry)
         {
             SoundManager.instance.PlayWithIndex(3);
-
+            Destroy(gameObject);
             Movement.Cancel();
             playerHealth.Lives();
 
@@ -140,8 +140,8 @@ public class Movement : MonoBehaviour
         dashed = false;
         Jump.fallGravityScale = 15f;
     }
-    public void DieAnimation()
-    {
-        animator.SetBool("Die", true);
-    }
+    //public void DieAnimation()
+    //{
+    //    animator.SetBool("Die", true);
+    //}
 }
