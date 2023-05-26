@@ -22,7 +22,14 @@ public class CountManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     #endregion
-
+    public bool EndCount()
+    {
+        if(countForWin == LevelManager.instance.count)
+        {
+            return true;
+        }
+        return false;
+    }
     
 
 }

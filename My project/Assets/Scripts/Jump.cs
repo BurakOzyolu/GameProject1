@@ -75,7 +75,7 @@ public class Jump : MonoBehaviour
         }
         Gravity();
     }
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         // Physics2D.OverlapCircle 2D cember icerisindeki nesneleri kontrol etmek icin kullaniliyor. Sirasiyla cemberin merkez noktasini, yaricapini ve katmanini alir.
         // Burada bizim karakterimizin havada ziplamasini engellemek icin feetPos'un etrafinda olusan cemberin icerisinde Ground var mi yok mu ona bakiyor eger var ise true alir yok ise false degerini alir.

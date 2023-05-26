@@ -30,12 +30,24 @@ public class LevelManager : MonoBehaviour
     [SerializeField] float normalSpawn;
     [SerializeField] float hardSpawn;
 
+    #region Singleton
+    public static LevelManager instance;
 
     // Awake : Starttan once calisir. Genelde sahne baslatma ve referans alma islemleri icin kullanilir. 
     private void Awake()
     {
-        SpawnPlayerCoroutine(); // Playerimizi olusturduk.
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
+        // Playerimizi olusturduk.
+        SpawnPlayerCoroutine();
     }
+    #endregion
     private void Start()
     {
         StartDelayFries();

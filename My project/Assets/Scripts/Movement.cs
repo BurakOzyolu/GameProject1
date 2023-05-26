@@ -28,12 +28,14 @@ public class Movement : MonoBehaviour
     PlayerHealth playerHealth;
     private float horizontalMove;
     TrailRenderer tr;
-
+    private Jump jump;
     private Animator animator;
 
     public static bool canDash = true;
     public static bool isDashing = false;
     public static bool dashed;
+    public static bool blocking;
+    public static bool died;
 
     [SerializeField] float dashAmount;
     [SerializeField] float dashCooldown;
@@ -47,7 +49,8 @@ public class Movement : MonoBehaviour
         delay = GameObject.Find("Level Manager").GetComponent<Delay>();
         playerHealth = GameObject.Find("Level Manager").GetComponent<PlayerHealth>();
         tr = GetComponent<TrailRenderer>();
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();  
+        jump = GetComponent<Jump>(); 
     }
 
     // Surekli olarak karakterimiz hareket edecegi icin veya ne zaman asagiya duserek olecegini bilemedigimiz icin bu iki metodu Update icerisinde calistiriyoruz.
@@ -56,6 +59,7 @@ public class Movement : MonoBehaviour
         MovementAction();
         PlayerDestroyer();
         StartDash();
+        Block();
     }
 
     // Karakterimizin hareket etmesini saglayan metod. Once saga veya sola gitme duruma bagli olarak horizontalMove degiskenine -1 veya +1 atiyoruz. Bunu kontrol etmek icin ise Input.GetAxis("Horizontal") ile sagliyoruz. Horizontal yazmamizin sebebi su Unity bizim icin kolaylik saglamis. A veya sol ok basma durumunda -1, D veya sag ok basma durumunda +1 degeri donduruyor. Bizde bu duruma gore rigidBody2D ye velecotiy hiz vererek hareket etmesini sagliyoruz. Daha sonrasinda ise karakterimiz hangi yone bakmasi gerekiyor ise o yone dogru Flipleme (dondurme) islemini gerceklestiriyoruz.
@@ -72,6 +76,10 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(horizontalMove * moveSpeed, rb.velocity.y);
             SpriteFlip(horizontalMove);
             animator.SetFloat("Move", Mathf.Abs(horizontalMove));
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 
@@ -139,9 +147,46 @@ public class Movement : MonoBehaviour
         isDashing = false;
         dashed = false;
         Jump.fallGravityScale = 15f;
+        LevelManager.canMove = true;
+        died = false;
     }
     //public void DieAnimation()
     //{
     //    animator.SetBool("Die", true);
     //}
+    public void Die()
+    {
+        Destroy(gameObject);
+        Died();
+        PlayerHealth.instance.Lives();
+        Cancel();
+        if (Delay.instance.delayTime)
+        {
+            Delay.instance.StartDelayTime();
+        }
+    }
+    void Block()
+    {
+        if (Input.GetMouseButton(0) && jump.IsGrounded() && !died)
+        {
+            animator.SetBool("Shield", true);
+            blocking = true;
+            rb.velocity = Vector2.zero;
+            LevelManager.canMove = false;
+        }
+        else if (Input.GetMouseButtonUp(0) )
+        {
+            animator.SetBool("Shield", false);
+            blocking = false;
+            LevelManager.canMove = true;
+        }
+        else if (!jump.IsGrounded())
+        {
+            animator.SetBool("Shield", false);
+        }
+    }
+    public void Died()
+    {
+        died = true;
+    }
 }
