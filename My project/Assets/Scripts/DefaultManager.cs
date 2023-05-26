@@ -22,24 +22,24 @@ public class DefaultManager : MonoBehaviour
     {
         easyMod = true;
         PlayerPrefs.SetInt("Easy Mode", easyMod ? 1 : 0);
-        LevelManager.countForWin = 1;
-        UIManager.level = 1;
+        CountManager.instance.countForWin = 1;
+        CountManager.instance.level = 1;
         SceneManager.LoadScene(1);
     }
     public void NormalButton()
     {
         normalMod = true;
         PlayerPrefs.SetInt("Normal Mode", normalMod ? 1 : 0);
-        LevelManager.countForWin = 2;
-        UIManager.level = 1;
+        CountManager.instance.countForWin = 2;
+        CountManager.instance.level = 1;
         SceneManager.LoadScene(1);
     }
     public void HardButton()
     {
         hardMod = true;
         PlayerPrefs.SetInt("Hard Mode", hardMod ? 1 : 0);
-        LevelManager.countForWin = 3;
-        UIManager.level = 1;
+        CountManager.instance.countForWin = 3;
+        CountManager.instance.level = 1;
         SceneManager.LoadScene(1);
     }
 }

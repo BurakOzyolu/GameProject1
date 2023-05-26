@@ -8,7 +8,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Transform playerSpawnPos;
     [SerializeField] GameObject friesPrefab;
     [SerializeField] public int count;
-    public static int countForWin = 1;
     [SerializeField] GameObject door;
     [SerializeField] GameObject runText;
 
@@ -76,7 +75,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator DelayFries()
     {
-        if(count == countForWin)
+        if(count == CountManager.instance.countForWin)
         {
             canWin = true;
             door.SetActive(true);
@@ -87,7 +86,7 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        if(count < countForWin)
+        if(count < CountManager.instance.countForWin)
         {
             FriesSpawner();
         }

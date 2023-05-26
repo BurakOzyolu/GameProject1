@@ -14,8 +14,8 @@ public class WinPanelScript : MonoBehaviour
     public void NextLevel()
     {
         int scorePoint = ScoreManager.score;
-        LevelManager.countForWin ++;
-        UIManager.level++;
+        CountManager.instance.countForWin ++;
+        CountManager.instance.level++;
         scoreText.text = scorePoint.ToString();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         LevelManager.canMove = true;
