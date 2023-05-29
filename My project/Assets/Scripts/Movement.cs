@@ -157,7 +157,6 @@ public class Movement : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
-        Died();
         PlayerHealth.instance.Lives();
         Cancel();
         if (Delay.instance.delayTime)
@@ -174,15 +173,11 @@ public class Movement : MonoBehaviour
             rb.velocity = Vector2.zero;
             LevelManager.canMove = false;
         }
-        else if (Input.GetMouseButtonUp(0) )
+        else if (Input.GetMouseButtonUp(0) && !died)
         {
             animator.SetBool("Shield", false);
             blocking = false;
             LevelManager.canMove = true;
-        }
-        else if (!jump.IsGrounded())
-        {
-            animator.SetBool("Shield", false);
         }
     }
     public void Died()
